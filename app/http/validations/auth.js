@@ -1,6 +1,6 @@
 const { body } = require('express-validator');
 const { UserModel } = require('../../models/user');
-function authValidator() {
+function registerValidation() {
   return [
     body('email')
       .isEmail()
@@ -37,6 +37,18 @@ function authValidator() {
   ];
 }
 
+function loginValidation() {
+  return [
+    body('email')
+      .isEmail()
+      .withMessage('ایمیل را صحیح وارد کنید . ')
+      .isEmpty()
+      .withMessage('ایمیل نباید خالی باشد .'),
+    body('password').isEmpty('پسورد نباید خالی باشد . '),
+  ];
+}
+
 module.exports = {
-  authValidator,
+  registerValidation,
+  loginValidation,
 };
