@@ -1,3 +1,5 @@
+const { router } = require('./router');
+
 class Application {
   #express = require('express');
   #app = this.#express();
@@ -60,6 +62,8 @@ class Application {
         message: 'this is a new Express application',
       });
     });
+
+    this.#app.use(router);
   }
 }
 
