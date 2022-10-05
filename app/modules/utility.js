@@ -4,6 +4,11 @@ const hashString = (str) => {
   return bcrypt.hashSync(str, salt);
 };
 
+const compareHashString = (str, hash) => {
+  return bcrypt.compareSync(str, hash);
+};
+
 module.exports = {
   hashString,
+  compareHashString,
 };
