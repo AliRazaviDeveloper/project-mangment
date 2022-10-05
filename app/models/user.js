@@ -7,11 +7,11 @@ const UserSchema = new mongoose.Schema(
     email: { type: String, unique: true, required: true },
     password: { type: String, required: true },
     avatar: { type: String, default: '/defaults/default.png' },
-    role: { type: String, default: ['USER'] },
+    role: { type: [String], default: ['USER'] },
     username: { type: String, unique: true, required: true },
     mobile: { type: String, unique: true, required: true },
     skills: { type: [String], default: [] },
-    teams: { type: [String], default: [] },
+    teams: { type: [mongoose.Types.ObjectId], default: [] },
   },
   {
     timestamps: true,
