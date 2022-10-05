@@ -1,11 +1,27 @@
 const { UserModel } = require('../../models/user');
-const { hashString } = require('../../modules/utility');
+const { hashString, compareHashString } = require('../../modules/utility');
 
 class AuthController {
-  login(req, res, next) {
-    res.json({
-      message: 'Login',
-    });
+  async login(req, res, next) {
+    try {
+      const { email, password } = req.body;
+      const user = await UserModel.findOne({ email });
+      if (!user)
+        throw { status: 401, message: 'ایمیل یا رمز عبور نادرست می باشد . ' };
+      const plainPassword = compareHashString(password, user.password);
+      if (!plainPassword)
+        throw { status: 401, message: 'ایمیل یا رمز عبور نادرست می باشد . ' };
+      res.status(200).json({
+        status: 200,
+        success: false,
+        result: {
+          message: 'شما با موفقیت وارد اکانت خود شدید . ',
+          token: '',
+        },
+      });
+    } catch (error) {
+      next(error);
+    }
   }
 
   async register(req, res, next) {
