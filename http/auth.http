@@ -1,0 +1,11 @@
+### register
+POST http://locahost:3500/auth/register
+Content-Type: 'application/json'
+
+{
+  "username":"",
+  "email":"",
+  "mobile":"",
+  "password":"",
+  "password_confirmation":""
+}
